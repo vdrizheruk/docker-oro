@@ -18,7 +18,7 @@ RUN php5enmod mcrypt
 # Setup php5 cli options
 RUN sed -i -e "s/;date.timezone\s=/date.timezone = UTC/g" /etc/php5/cli/php.ini
 RUN sed -i -e "s/short_open_tag\s=\s*.*/short_open_tag = Off/g" /etc/php5/cli/php.ini
-RUN sed -i -e "s/memory_limit\s=\s.*/memory_limit = 1024M/g" /etc/php5/cli/php.ini
+RUN sed -i -e "s/memory_limit\s=\s.*/memory_limit = 2048M/g" /etc/php5/cli/php.ini
 RUN sed -i -e "s/max_execution_time\s=\s.*/max_execution_time = 0/g" /etc/php5/cli/php.ini
 
 # Setup php5 fpm options
