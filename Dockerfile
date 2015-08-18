@@ -11,17 +11,17 @@ RUN apt-get install --no-install-recommends -y ca-certificates unzip python-soft
  php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc \ 
  php5-xsl php5-intl php5-sqlite \ 
 # programs
- nano git htop mcrypt curl procps mysql-client
+ nano git htop mcrypt curl procps mysql-client supervisor
 
 RUN php5enmod mcrypt
 
-# Setup php5 cli options
+# Setup php5-cli options
 RUN sed -i -e "s/;date.timezone\s=/date.timezone = UTC/g" /etc/php5/cli/php.ini
 RUN sed -i -e "s/short_open_tag\s=\s*.*/short_open_tag = Off/g" /etc/php5/cli/php.ini
-RUN sed -i -e "s/memory_limit\s=\s.*/memory_limit = 512M/g" /etc/php5/cli/php.ini
+RUN sed -i -e "s/memory_limit\s=\s.*/memory_limit = 1024M/g" /etc/php5/cli/php.ini
 RUN sed -i -e "s/max_execution_time\s=\s.*/max_execution_time = 0/g" /etc/php5/cli/php.ini
 
-# Setup php5 fpm options
+# Setup php5-fpm options
 RUN sed -i -e "s/;date.timezone\s=/date.timezone = UTC/g" /etc/php5/fpm/php.ini
 RUN sed -i -e "s/short_open_tag\s=\s*.*/short_open_tag = Off/g" /etc/php5/fpm/php.ini
 RUN sed -i -e "s/memory_limit\s=\s.*/memory_limit = 1024M/g" /etc/php5/fpm/php.ini
@@ -49,7 +49,7 @@ RUN rm -rf /var/lib/{apt,cache,log}/
 WORKDIR /var/www
 
 COPY etc /etc
-
+COPY opt /opt
 
 COPY entrypoint.sh /entrypoint.sh
 
