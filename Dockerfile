@@ -5,11 +5,13 @@ RUN apt-get update && apt-get upgrade -y && \
 #RUN MYSQL_ROOT_PASSWORD=`date +%s | sha256sum | base64 | head -c 32`
 
 # persistent / runtime deps
-apt-get install --no-install-recommends -y ca-certificates unzip python-software-properties mc curl libpcre3 librecode0 libsqlite3-0 libxml2 \
+apt-get install --no-install-recommends -y ca-certificates unzip python-software-properties mc curl libpcre3 librecode0 libsqlite3-0 libxml2 && \
 # nginx + php
- php5-fpm php5-cli php5-dev php5-common php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc php5-xsl php5-intl php5-sqlite && php5enmod mcrypt \
+ php5-fpm php5-cli php5-dev php5-common php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc php5-xsl php5-intl php5-sqlite && \
 # programs
  nano git htop mcrypt curl procps mysql-client supervisor openssh-server && \
+
+RUN php5enmod mcrypt
 
 # for ssh
 mkdir /var/run/sshd && echo 'root:root' | chpasswd && \
