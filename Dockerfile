@@ -11,7 +11,19 @@ RUN apt-get install --no-install-recommends -y ca-certificates unzip python-soft
  php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc \ 
  php5-xsl php5-intl php5-sqlite \ 
 # programs
- nano git htop mcrypt curl procps mysql-client supervisor
+ nano git htop mcrypt curl procps mysql-client supervisor openssh-server
+
+# for ssh
+RUN mkdir /var/run/sshd
+RUN echo 'root:root' | chpasswd
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
 
 RUN php5enmod mcrypt
 
@@ -55,5 +67,6 @@ COPY entrypoint.sh /entrypoint.sh
 
 VOLUME ["/var/www"]
 EXPOSE 80
+EXPOSE 22
 
 ENTRYPOINT ["/entrypoint.sh"]
