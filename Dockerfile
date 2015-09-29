@@ -59,6 +59,6 @@ COPY opt /opt
 COPY entrypoint.sh /entrypoint.sh
 
 VOLUME ["/var/www"]
-EXPOSE 80, 22
+EXPOSE 80 22
 
 ENTRYPOINT ["/entrypoint.sh"]
