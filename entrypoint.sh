@@ -3,6 +3,6 @@
 service nginx start
 service php5-fpm start
 service supervisor start
-service sshd start
+service ssh start
 
 /bin/bash
