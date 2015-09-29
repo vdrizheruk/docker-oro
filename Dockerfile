@@ -9,7 +9,7 @@ apt-get install --no-install-recommends -y ca-certificates unzip python-software
 # nginx + php
  php5-fpm php5-cli php5-dev php5-common php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc php5-xsl php5-intl php5-sqlite && \
 # programs
- nano git htop mcrypt curl procps mysql-client supervisor openssh-server && \
+ nano git htop mcrypt curl procps mysql-client supervisor openssh-server
 
 RUN php5enmod mcrypt
 
