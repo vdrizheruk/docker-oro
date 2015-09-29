@@ -11,7 +11,7 @@ apt-get install --no-install-recommends -y ca-certificates unzip python-software
 # programs
  nano git htop mcrypt curl procps mysql-client supervisor openssh-server
 
-RUN php5enmod mcrypt
+RUN php5enmod mcrypt && \
 
 # for ssh
 mkdir /var/run/sshd && echo 'root:root' | chpasswd && \
