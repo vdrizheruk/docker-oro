@@ -14,16 +14,14 @@ apt-get install --no-install-recommends -y ca-certificates unzip python-software
 RUN php5enmod mcrypt && \
 
 # for ssh
-mkdir /var/run/sshd && echo 'root:root' | chpasswd && \
-sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+mkdir /var/run/sshd && usermod --shell /bin/bash www-data && echo 'www-data:www-data' | chpasswd && \
+#sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
 
 # SSH login fix. Otherwise user is kicked off after login
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
 echo "export VISIBLE=now" >> /etc/profile
 
 ENV NOTVISIBLE "in users profile"
-
-#RUN php5enmod mcrypt
 
 # Setup php5-cli options
 RUN sed -i -e "s/;date.timezone\s=/date.timezone = UTC/g" /etc/php5/cli/php.ini && \
