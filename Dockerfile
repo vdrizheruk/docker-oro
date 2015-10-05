@@ -9,9 +9,9 @@ apt-get install --no-install-recommends -y ca-certificates unzip python-software
 # nginx + php
  php5-fpm php5-cli php5-dev php5-common php5-mysql php5-curl php5-gd php5-mcrypt php5-sqlite php5-xmlrpc php5-xsl php5-intl php5-sqlite \
 # programs
- nano git htop mcrypt curl procps mysql-client supervisor openssh-server
+ nano git htop mcrypt curl procps mysql-client openssh-server python-setuptools procps
 
-RUN php5enmod mcrypt && \
+RUN easy_install supervisor && easy_install supervisor-stdout && easy_install supervisor-logging &&  php5enmod mcrypt && \
 
 # for ssh
 mkdir /var/run/sshd && usermod --shell /bin/bash www-data && echo 'www-data:www-data' | chpasswd && \
