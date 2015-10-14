@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t vdrizheruk/http-oro .
+docker build --no-cache -t vdrizheruk/http-oro .
